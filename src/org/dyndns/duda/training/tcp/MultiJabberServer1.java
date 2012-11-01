@@ -40,11 +40,11 @@ public class MultiJabberServer1 {
 			System.out.println("Server on port: " + PORT);
 			while (true) {
 				sel.select();
-				Iterator it = sel.selectedKeys().iterator();
+				Iterator<SelectionKey> it = sel.selectedKeys().iterator();
 				while (it.hasNext()) {
-					SelectionKey skey = (SelectionKey) it.next();
+					key = (SelectionKey) it.next();
 					it.remove();
-					if (skey.isAcceptable()) {
+					if (key.isAcceptable()) {
 						ch = ssc.accept();
 						System.out.println("Accepted connection from:"
 								+ ch.socket());
@@ -53,7 +53,7 @@ public class MultiJabberServer1 {
 					} else {
 						// Note no check performed if the channel
 						// is writable or readable - to keep it simple
-						ch = (SocketChannel) skey.channel();
+						ch = (SocketChannel) key.channel();
 						ch.read(buffer);
 						CharBuffer cb = cs.decode((ByteBuffer) buffer.flip());
 						String response = cb.toString();

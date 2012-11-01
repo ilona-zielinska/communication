@@ -17,7 +17,7 @@ public class NonBlockingIO {
 		int cPort = Integer.parseInt(args[0]);
 		int sPort = Integer.parseInt(args[1]);
 		SocketChannel ch = SocketChannel.open();
-		Selector sel = sel = Selector.open();
+		Selector sel = Selector.open();
 		try {
 			ch.socket().bind(new InetSocketAddress(cPort));
 			ch.configureBlocking(false);
@@ -29,7 +29,7 @@ public class NonBlockingIO {
 			// Keys whose underlying channel is ready, the
 			// operation this channel is interested in can be
 			// performed without blocking.
-			Iterator it = sel.selectedKeys().iterator();
+			Iterator<SelectionKey> it = sel.selectedKeys().iterator();
 			while (it.hasNext()) {
 				SelectionKey key = (SelectionKey) it.next();
 				it.remove();

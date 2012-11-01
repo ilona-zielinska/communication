@@ -41,7 +41,7 @@ public class JabberClient1 {
 			ByteBuffer buf = ByteBuffer.allocate(16);
 			while (!done) {
 				sel.select();
-				Iterator it = sel.selectedKeys().iterator();
+				Iterator<SelectionKey> it = sel.selectedKeys().iterator();
 				while (it.hasNext()) {
 					SelectionKey key = (SelectionKey) it.next();
 					it.remove();
